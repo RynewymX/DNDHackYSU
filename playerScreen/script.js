@@ -56,3 +56,23 @@ function toggleMenu() {
 function showSpells() {
     // Your showSpells function implementation
 }
+
+
+
+
+
+var client_id = Date.now();
+const socket = new WebSocket(`ws://localhost:8000/ws/${client_id}`);
+
+socket.onopen = () => {
+  socket.send("Hello, WebSocket Server!");
+};
+
+socket.onmessage = (event) => {
+  console.log("Server says: " + event.data);
+};
+
+// Close the WebSocket connection when done
+socket.onclose = () => {
+  console.log("WebSocket connection closed.");
+};
