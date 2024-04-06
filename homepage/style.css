@@ -1,0 +1,49 @@
+@font-face {
+    font-family: 'homeFont';
+    src: url('DMSans-VariableFont_opsz,wght.ttf');
+}
+
+h1 {
+    font-family: 'homeFont', sans-serif; /* Fallback font family */
+    position: absolute;
+    top: 20px; /* Adjust this value as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1; /* Ensure it's above other content */
+    color: white;
+    -webkit-text-stroke: 2px;
+    -webkit-text-stroke-color: black;
+}
+
+
+button {
+    background-image: url(textures/crack.png);
+    background-size: 60%;
+    border: black;
+    border-radius: 10px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+body {
+    background-image: url(textures/moss.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Stack buttons vertically */
+}
+

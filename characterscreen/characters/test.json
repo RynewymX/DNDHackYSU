@@ -1,0 +1,14 @@
+{
+    "character_name": "MX",
+    "character_level": 5,
+    "character_spells": ["Fireball", "Eldritch Blast"],
+    "character_stats": {
+        "Strength": 10,
+        "Dexterity": 12,
+        "Constitution": 14,
+        "Intelligence": 16,
+        "Wisdom": 14,
+        "Charisma": 8
+    }
+  }
+  
