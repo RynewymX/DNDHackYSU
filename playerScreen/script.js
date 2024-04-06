@@ -64,3 +64,54 @@ async function logMovies() {
   }
 
 logMovies();
+
+async function checkForOtherPlayers() {
+    try {
+        const response = await fetch("http://10.247.71.30:5000/players");
+        if (response.ok) {
+            const players = await response.json();
+            for (const player of players) {
+                if (player.id !== currentPlayerId) {
+                    try {
+                        const response = await fetch(`http://10.247.71.30:5000/player/${player.id}`);
+                        if (response.ok) {
+                            const playerData = await response.json();
+                            console.log(`Data of player ${player.id}:`, playerData);
+                        } else {
+                            console.error(`Failed to download data of player ${player.id}.`);
+                        }
+                    } catch (error) {
+                        console.error(`Error while downloading data of player ${player.id}:`, error);
+                    }
+                }
+            }
+        } else {
+            console.error("Failed to fetch other players' data.");
+        }
+    } catch (error) {
+        console.error("Error while fetching other players' data:", error);
+    }
+}
+
+async function informOtherPlayers(playerData) {
+    try {
+        const response = await fetch("http://10.247.71.30:5000/player/join", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(playerData)
+        });
+        if (response.ok) {
+            console.log("Other players informed about the joining player.");
+        } else {
+            console.error("Failed to inform other players about the joining player.");
+        }
+    } catch (error) {
+        console.error("Error while informing other players:", error);
+    }
+}
+
+const currentPlayerId = "player123";
+informOtherPlayers(currentPlayerData); 
+checkForOtherPlayers(); 
