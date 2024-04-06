@@ -1,8 +1,15 @@
+@font-face {
+    font-family: 'homeFont';
+    src: url('../fonts/DMSans-VariableFont_opsz\,wght.ttf');
+}
+
 body {
-    background-color: gray;
+    background-image: url(imgs/dungeonwall.jpg);
 }
 
 h1 {
+    font-family: 'homeFont';
+    color: white;
     text-align: center;
 }
 
@@ -11,6 +18,7 @@ h1 {
 }
 
 .character-list {
+    font-family: 'homeFont';
     flex: 1;
     overflow-y: auto;
     padding: 20px;
@@ -33,3 +41,57 @@ h1 {
     flex: 2;
     padding: 20px;
 }
+
+.character-item {
+    position: relative;
+}
+
+.remove-button {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 20px; /* Adjust size as needed */
+    height: 20px; /* Adjust size as needed */
+}
+
+#characterDetails {
+    background-color: #c1c1c1;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-left: 20px; /* Adjust the margin as needed */
+    flex: 2; /* Ensure it takes up the remaining space */
+}
+
+#characterDetails h2 {
+    font-family: 'homeFont';
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#characterDetails p {
+    font-family: 'homeFont';
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+#characterDetails h3 {
+    font-family: 'homeFont';
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#characterDetails ul {
+    font-family: 'homeFont';
+    list-style-type: none;
+    padding: 0;
+}
+
+#characterDetails li {
+    font-family: 'homeFont';
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+

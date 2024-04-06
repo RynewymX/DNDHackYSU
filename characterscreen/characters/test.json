@@ -1,5 +1,6 @@
 {
     "character_name": "MX",
+    "character_class": "Goblin",
     "character_level": 5,
     "character_spells": ["Fireball", "Eldritch Blast"],
     "character_stats": {

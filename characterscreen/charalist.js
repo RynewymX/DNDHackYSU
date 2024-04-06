@@ -24,8 +24,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         characterItem.appendChild(characterNameElement);
 
-        const removeButton = document.createElement("button");
-        removeButton.textContent = "Remove";
+        const removeButton = document.createElement("img");
+        removeButton.src = "imgs/trashicon.webp"; // Replace with the path to your remove button image
+        removeButton.alt = "Remove";
+        removeButton.classList.add("remove-button");
         removeButton.addEventListener("click", () => {
             removeCharacter(character);
             characterList.removeChild(characterItem);
@@ -86,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const statsList = Object.entries(character.character_stats).map(([stat, value]) => `<li>${stat}: ${value}</li>`).join("");
         characterDetails.innerHTML = `
             <h2>${character.character_name}</h2>
+            <p>Class: ${character.character_class}</p>
             <p>Level: ${character.character_level}</p>
             <h3>Stats:</h3>
             <ul>${statsList}</ul>
