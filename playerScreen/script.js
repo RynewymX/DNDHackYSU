@@ -56,3 +56,11 @@ function toggleMenu() {
 function showSpells() {
     // Your showSpells function implementation
 }
+
+async function logMovies() {
+    const response = await fetch("http://10.247.71.30:5000/test");
+    const movies = await response.json();
+    console.log(movies);
+  }
+
+logMovies();
