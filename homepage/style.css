@@ -17,7 +17,7 @@ h1 {
 
 
 button {
-    background-image: url(textures/crack.png);
+    background-image: url(textures/Asphalt008_1K-PNG_Color.png);
     background-size: 60%;
     border: black;
     border-radius: 10px;
@@ -30,7 +30,7 @@ button {
 }
 
 body {
-    background-image: url(textures/moss.png);
+    background-image: url(textures/Rock012_1K-PNG_Color.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
@@ -45,5 +45,6 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column; /* Stack buttons vertically */
+    margin-bottom: 30px;
 }
 
