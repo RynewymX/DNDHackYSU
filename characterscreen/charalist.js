@@ -92,6 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <p>Level: ${character.character_level}</p>
             <h3>Stats:</h3>
             <ul>${statsList}</ul>
+            <img src=${character.character_icon} alt="Character Icon"></img>
         `;
     }
 });
