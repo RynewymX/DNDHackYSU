@@ -5,11 +5,22 @@ function getQueryParameter(name) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOMContentLoaded event fired");
+    
     // Retrieve character information from query parameters
     const characterName = getQueryParameter("name");
+    const characterIcon = getQueryParameter("icon");
+
+    console.log("Character Name:", characterName);
+    console.log("Character Icon:", characterIcon);
 
     // Display character name in the top right corner
     const characterNameElement = document.getElementById("characterName");
+    const characterIconElement = document.getElementById("characterIcon");
+
+    console.log("Character Name Element:", characterNameElement);
+    console.log("Character Icon Element:", characterIconElement);
+
     if (characterNameElement) {
         if (characterName !== null) {
             characterNameElement.textContent = characterName;
@@ -18,6 +29,20 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     } else {
         console.error("Character name element not found in DOM.");
+    }
+
+    if (characterIconElement) {
+        if (characterIcon !== null) {
+            // Create an img element for the character icon
+            const iconImg = document.createElement("img");
+            iconImg.src = characterIcon;
+            iconImg.alt = "Character Icon";
+            characterIconElement.appendChild(iconImg);
+        } else {
+            console.error("Character icon not provided in URL.");
+        }
+    } else {
+        console.error("Character icon element not found in DOM.");
     }
 });
 
@@ -29,24 +54,5 @@ function toggleMenu() {
 
 // Function to handle the "Spells" button click
 function showSpells() {
-    console.log("Spells button clicked"); // Debugging statement
-    // Retrieve character information from query parameters (assuming character data is stored in localStorage)
-    const characterName = getQueryParameter("name");
-    const characterSpells = getQueryParameter("spells");
-    const characters = JSON.parse(localStorage.getItem("characters")) || [];
-    
-    // Find the selected character by name
-    const selectedCharacter = characters.find(character => character.character_name === characterName);
-    
-    // Show spells
-    if (selectedCharacter && selectedCharacter.character_spells) {
-        alert(characterName +  "'s spells are " + characterSpells);
-    } else {
-        alert("No spells found for " + characterName);
-    }
-}
-
-// Function to handle the "Import Map" button click
-function importMap() {
-    alert("Importing map...");
+    // Your showSpells function implementation
 }
