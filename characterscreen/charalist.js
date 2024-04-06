@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const characterNameElement = document.createElement("span");
         characterNameElement.textContent = character.character_name;
-        characterNameElement.addEventListener("click", () => {
+        characterItem.addEventListener("click", () => {
             showCharacterDetails(character);
         });
         characterItem.appendChild(characterNameElement);
