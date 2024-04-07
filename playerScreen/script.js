@@ -1,82 +1,83 @@
-
-
-// Function to parse query parameters from URL
-function getQueryParameter(name) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(name);
-}
-
-const character = JSON.parse(getQueryParameter("character"));
-
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("DOMContentLoaded event fired");
-    
+    // Function to parse query parameters from URL
+    function getQueryParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
     // Retrieve character information from query parameters
-    const characterName = character.character_name;
-    const characterIcon = character.character_icon;
+    const character = JSON.parse(getQueryParameter("character"));
 
-    console.log("Character Name:", characterName);
-    console.log("Character Icon:", characterIcon);
+    // Store initial position of characterIcon
+    let characterIconPosition = { x: 0, y: 0 };
 
-    // Display character name in the top right corner
+    // Function to move characterIcon
+    function moveCharacterIcon(x, y) {
+        characterIconPosition.x += x;
+        characterIconPosition.y += y;
+        document.getElementById("characterIcon").style.transform = `translate(${characterIconPosition.x}px, ${characterIconPosition.y}px)`;
+    }
+
+    // Event listener for keydown events
+    document.addEventListener("keydown", function(event) {
+        switch(event.key) {
+            case "ArrowUp":
+                moveCharacterIcon(0, -50);
+                break;
+            case "ArrowDown":
+                moveCharacterIcon(0, 50);
+                break;
+            case "ArrowLeft":
+                moveCharacterIcon(-50, 0);
+                break;
+            case "ArrowRight":
+                moveCharacterIcon(50, 0);
+                break;
+        }
+    });
+
+    // Display character name and icon
     const characterNameElement = document.getElementById("characterName");
     const characterIconElement = document.getElementById("characterIcon");
 
-    console.log("Character Name Element:", characterNameElement);
-    console.log("Character Icon Element:", characterIconElement);
+    if (characterNameElement && characterIconElement) {
+        if (character) {
+            const characterName = character.character_name;
+            const characterIcon = character.character_icon;
 
-    if (characterNameElement) {
-        if (characterName !== null) {
-            characterNameElement.textContent = characterName;
+            characterNameElement.textContent = characterName || "Unknown";
+
+            if (characterIcon) {
+                // Create an img element for the character icon
+                const iconImg = document.createElement("img");
+                iconImg.src = characterIcon;
+                iconImg.alt = "Character Icon";
+                characterIconElement.appendChild(iconImg);
+            }
         } else {
-            console.error("Character name not provided in URL.");
+            console.error("Character information not provided in URL.");
         }
     } else {
-        console.error("Character name element not found in DOM.");
+        console.error("Character name or icon element not found in DOM.");
     }
 
-    if (characterIconElement) {
-        if (characterIcon !== null) {
-            // Create an img element for the character icon
-            const iconImg = document.createElement("img");
-            iconImg.src = characterIcon;
-            iconImg.alt = "Character Icon";
-            characterIconElement.appendChild(iconImg);
-        } else {
-            console.error("Character icon not provided in URL.");
+    // Establish WebSocket connection
+    const socket = new WebSocket(`ws://localhost:8000/ws`);
+
+    socket.onopen = () => {
+        console.log("WebSocket connection established.");
+        // Send character information to the server
+        if (character) {
+            socket.send(JSON.stringify(character));
         }
-    } else {
-        console.error("Character icon element not found in DOM.");
-    }
+    };
+
+    socket.onmessage = (event) => {
+        console.log("Message received from server:", event.data);
+        // You can handle the message received from the server here
+    };
+
+    socket.onclose = () => {
+        console.log("WebSocket connection closed.");
+    };
 });
-
-// Function to toggle the dropdown menu
-function toggleMenu() {
-    var dropdownContent = document.getElementById("dropdownContent");
-    dropdownContent.classList.toggle("show");
-}
-
-// Function to handle the "Spells" button click
-function showSpells() {
-    // Your showSpells function implementation
-}
-
-
-
-
-
-var client_id = Date.now();
-const socket = new WebSocket(`ws://localhost:8000/ws/${client_id}`);
-
-socket.onopen = () => {
-  socket.send(JSON.stringify(character));
-};
-
-socket.onmessage = (event) => {
-  console.log(event.data);
-};
-
-// Close the WebSocket connection when done
-socket.onclose = () => {
-  console.log("WebSocket connection closed.");
-};
