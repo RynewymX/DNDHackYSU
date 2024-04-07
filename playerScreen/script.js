@@ -1,15 +1,19 @@
+
+
 // Function to parse query parameters from URL
 function getQueryParameter(name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
 }
 
+const character = JSON.parse(getQueryParameter("character"));
+
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOMContentLoaded event fired");
     
     // Retrieve character information from query parameters
-    const characterName = getQueryParameter("name");
-    const characterIcon = getQueryParameter("icon");
+    const characterName = character.character_name;
+    const characterIcon = character.character_icon;
 
     console.log("Character Name:", characterName);
     console.log("Character Icon:", characterIcon);
@@ -65,11 +69,11 @@ var client_id = Date.now();
 const socket = new WebSocket(`ws://localhost:8000/ws/${client_id}`);
 
 socket.onopen = () => {
-  socket.send("Hello, WebSocket Server!");
+  socket.send(JSON.stringify(character));
 };
 
 socket.onmessage = (event) => {
-  console.log("Server says: " + event.data);
+  console.log(event.data);
 };
 
 // Close the WebSocket connection when done
